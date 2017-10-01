@@ -1,7 +1,7 @@
 var ejs = require('ejs')
   , _ = require('lodash')
   , Entities = require('html-entities').XmlEntities
-  , Slack = require('slackihook')
+  , Aethonan = require('slackihook')
 
 module.exports = {
   init: function (config, job, context, cb) {
@@ -12,13 +12,13 @@ module.exports = {
       listen: function (io, context) {
         var phase = null;
         function onDeployError(id, data) {
-          slackPOST(io, job, {exitCode: 1}, context, config, 'deploy')
+          aethonanPOST(io, job, {exitCode: 1}, context, config, 'deploy')
           cleanup();
         }
         function onPhaseDone(id, data) {
           phase = data.phase;
           if (phase === "test" || phase === "deploy") {
-            slackPOST(io, job, data, context, config, phase)
+            aethonanPOST(io, job, data, context, config, phase)
             if (data.next === "deploy") {
               io.on('job.status.phase.errored', onDeployError);
             } else {
@@ -38,21 +38,21 @@ module.exports = {
   }
 }
 
-function removeSlackEvilAttr(str){
+function removeAethonanEvilAttr(str){
     str = str.replace("&", "&amp;");
     str = str.replace("<", "&lt;");
     str = str.replace(">", "&gt;");
     return str;
 }
 
-function slackPOST(io, job, data, context, config, phase) {
+function aethonanPOST(io, job, data, context, config, phase) {
   var result = (data.exitCode === 0 ? 'pass' : 'fail');
   if (job.trigger.message) {
       var temp = job.trigger.message.split(/\n/);
-      job.trigger.message = removeSlackEvilAttr(temp[0]);
+      job.trigger.message = removeAethonanEvilAttr(temp[0]);
       temp.splice(0, 1);
       var more = temp.join("\n");
-      job.trigger.messagemore = removeSlackEvilAttr(more);
+      job.trigger.messagemore = removeAethonanEvilAttr(more);
   }
   try {
     var compile = function (tmpl) {
@@ -62,7 +62,7 @@ function slackPOST(io, job, data, context, config, phase) {
     };
     entities = new Entities();
     var msg = entities.decode(compile(config[phase+'_'+result+'_message']));
-    slack = new Slack(config.webhookURL);
+    aethonan = new Aethonan(config.webhookURL);
     var sendObject = {
       channel: config.channel,
       username: compile(config.username),
@@ -79,20 +79,20 @@ function slackPOST(io, job, data, context, config, phase) {
       ];
     }
     
-    slack.send(sendObject, function(err) {
+    aethonan.send(sendObject, function(err) {
       // It's too late to add notes to the job; just log
       if (err) console.error(err.stack)
     })
     io.emit('job.status.command.comment', job._id, {
-      comment: 'Slack payload sent',
-      plugin: 'slack',
+      comment: 'Aethonan payload sent',
+      plugin: 'aethonan',
       time: new Date(),
     })
   } catch (e) {
     console.error(e.stack)
     io.emit('job.status.command.comment', job._id, {
       comment: e.stack,
-      plugin: 'slack',
+      plugin: 'aethonan',
       time: new Date(),
     })
   }

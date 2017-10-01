@@ -2,20 +2,20 @@
 
 var fs = require('fs');
 var path = require('path');
-var Slack = require('slackihook');
+var Aethonan = require('slackihook');
 
 module.exports = {
   config: require('./schema'),
   
   globalRoutes: function (app) {
     app.post('/test', function (req, res) {
-      var slack = new Slack(req.body.config.webhookURL);
+      var aethonan = new Aethonan(req.body.config.webhookURL);
       
-      slack.send({
+      aethonan.send({
         channel: req.body.config.channel,
         username: 'Strider',
         icon_url: req.body.config.icon_url,
-        text: 'Slack plugin test!'
+        text: 'Aethonan plugin test!'
       }, function(err, out) {
         if (err) {
           return res.status(500).send(err.stack);

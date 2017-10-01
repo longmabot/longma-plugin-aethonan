@@ -38,7 +38,7 @@ describe("worker", function() {
   beforeEach(function(done) {
     exitCode = 0;
     job = {
-      project: { name: "strider-slack" },
+      project: { name: "strider-aethonan" },
       ref: { branch: "master" },
       _id: "123",
       trigger: { 
@@ -55,9 +55,9 @@ describe("worker", function() {
 
   it("emits properly", function() {
     var out = work();
-    expect(io.emit).to.have.been.calledWith('plugin.slack.fire', 'token', 'subdomain');
+    expect(io.emit).to.have.been.calledWith('plugin.aethonan.fire', 'token', 'subdomain');
     expect(out.channel).to.eq('#general');
-    expect(out.username).to.eq('strider-slack');
+    expect(out.username).to.eq('strider-aethonan');
     expect(out.icon_url).to.eq('http://media.stridercd.com/img/logo.png');
     expect(out.text.length).to.be.greaterThan(10);
   });
@@ -80,7 +80,7 @@ describe("worker", function() {
     });
 
     it("links happy text to the logs", function() {
-      expect(out.text).to.include("<http://example.com/strider-slack/job/123|Tests are passing>");
+      expect(out.text).to.include("<http://example.com/strider-aethonan/job/123|Tests are passing>");
     });
 
     it("doesn't say fail", function() {
@@ -123,7 +123,7 @@ describe("worker", function() {
     });
 
     it("links unhappy text to the logs", function() {
-      expect(out.text).to.include("<http://example.com/strider-slack/job/123|Tests are failing>");
+      expect(out.text).to.include("<http://example.com/strider-aethonan/job/123|Tests are failing>");
     });
 
     it("doesn't say pass", function() {
@@ -145,7 +145,7 @@ describe("worker", function() {
     });
 
     it("links unhappy text to the logs", function() {
-      expect(out.text).to.include("<http://example.com/strider-slack/job/123|Tests are failing>");
+      expect(out.text).to.include("<http://example.com/strider-aethonan/job/123|Tests are failing>");
     });
 
     it("doesn't say pass", function() {

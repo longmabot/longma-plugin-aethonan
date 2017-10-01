@@ -2,9 +2,9 @@
 var schema = require('./schema');
 var _ = { each: require('lodash.foreach') };
 
-app.controller('SlackController', ['$scope', '$http', function ($scope, $http) {
+app.controller('AethonanController', ['$scope', '$http', function ($scope, $http) {
   $scope.fillEmptyFields = function() {
-    $scope.config = $scope.configs[$scope.branch.name].slack.config || {};
+    $scope.config = $scope.configs[$scope.branch.name].aethonan.config || {};
     _.each(schema, function(schemaValue,key) {
       var value = $scope.config[key]
       if (! value || value.length === 0 )
@@ -18,7 +18,7 @@ app.controller('SlackController', ['$scope', '$http', function ($scope, $http) {
       $scope.config.icon_url = root+$scope.config.icon_url
     }
   }
-  $scope.$watch('configs[branch.name].slack.config', function (value) {
+  $scope.$watch('configs[branch.name].aethonan.config', function (value) {
     $scope.config = value;
   });
   $scope.saving = false;
@@ -26,7 +26,7 @@ app.controller('SlackController', ['$scope', '$http', function ($scope, $http) {
     $scope.fillEmptyFields();
     $scope.normalizeIconURL()
     $scope.saving = true;
-    $scope.pluginConfig('slack', $scope.config, function() {
+    $scope.pluginConfig('aethonan', $scope.config, function() {
       $scope.saving = false;
     });
   };
@@ -35,7 +35,7 @@ app.controller('SlackController', ['$scope', '$http', function ($scope, $http) {
     $('#ejs_hint').modal().on('shown', function () {
       _.each(['bitbucket_hook', 'manual_retest'], function (kind) {
         if ($scope.hintsLoaded[kind]) return false;
-        $.get('/ext/slack/ejs_hint/'+kind, function(data) {
+        $.get('/ext/aethonan/ejs_hint/'+kind, function(data) {
           $('#'+kind+'_hint').html($('<pre>').text(data));
           $scope.hintsLoaded[kind] = true;
         });
@@ -48,10 +48,10 @@ app.controller('SlackController', ['$scope', '$http', function ($scope, $http) {
       $scope.fillEmptyFields()
       $scope.normalizeIconURL()
       $scope.testing = true;
-      $http.post('/ext/slack/test', {
+      $http.post('/ext/aethonan/test', {
         config: $scope.config
       }).success(function(data, status, headers, config) {
-        alert('Looks good from here. Check your Slack!')
+        alert('Looks good from here. Check your Aethonan!')
       }).error(function(data, status, headers, config) {
         alert(data)
       })['finally'](function() {
@@ -1026,7 +1026,7 @@ module.exports = {
   },
   icon_url: {
     type: String,
-    default: '/ext/slack/bot_avatar'
+    default: '/ext/aethonan/bot_avatar'
   },
   test_pass_message: {
     type: String,

@@ -14,7 +14,7 @@ module.exports = {
   },
   icon_url: {
     type: String,
-    default: '/ext/slack/bot_avatar'
+    default: '/ext/aethonan/bot_avatar'
   },
   test_pass_message: {
     type: String,

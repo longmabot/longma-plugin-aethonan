@@ -2,9 +2,9 @@
   type: 'TEST_AND_DEPLOY',
   project:
    { _id: 539a22ef248749d779000135,
-     name: 'dft/strider-slack',
-     display_name: 'dft/strider-slack',
-     display_url: 'https://bitbucket.com/dft/strider-slack',
+     name: 'dft/strider-aethonan',
+     display_name: 'dft/strider-aethonan',
+     display_url: 'https://bitbucket.com/dft/strider-aethonan',
      creator:
       { _id: 538f59c747e7bceb1e00000e,
         __v: 2,
@@ -20,13 +20,13 @@
      provider:
       { id: 'bitbucket',
         account: 'keyvanfatehi',
-        repo_id: 'dft/strider-slack',
+        repo_id: 'dft/strider-aethonan',
         config:
          { auth: [Object],
            scm: 'git',
-           url: 'git://bitbucket.com/dft/strider-slack',
+           url: 'git://bitbucket.com/dft/strider-aethonan',
            owner: 'dft',
-           repo: 'strider-slack',
+           repo: 'strider-aethonan',
            pull_requests: 'none',
            whitelist: [],
            pk: 811030,
@@ -66,7 +66,7 @@
      environment: { commands: [] } },
   trigger:
    { type: 'commit',
-     url: 'https://bitbucket.org/dft/strider-slack/commits/d41a6dfaabb09879ccd75993233e6d2aeef7a2ae',
+     url: 'https://bitbucket.org/dft/strider-aethonan/commits/d41a6dfaabb09879ccd75993233e6d2aeef7a2ae',
      message: 'logcheck\n',
      timestamp: Fri Jun 13 2014 00:17:40 GMT-0700 (PDT),
      source: { plugin: 'bitbucket', type: 'plugin' },
@@ -79,9 +79,9 @@
      pk: 811030,
      whitelist: [],
      pull_requests: 'none',
-     repo: 'strider-slack',
+     repo: 'strider-aethonan',
      owner: 'dft',
-     url: 'git://bitbucket.com/dft/strider-slack',
+     url: 'git://bitbucket.com/dft/strider-aethonan',
      scm: 'git',
      auth: { type: 'ssh' } },
   fromStriderJson: true }

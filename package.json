@@ -1,7 +1,7 @@
 {
-  "name": "strider-slack",
-  "version": "2.0.1",
-  "description": "Plugin for Strider-CD to utilize Slack incoming webhook",
+  "name": "longma-plugin-aethonan",
+  "version": "3.0.0",
+  "description": "Plugin for Longma to utilize Aethonan incoming webhook",
   "main": "webapp.js",
   "scripts": {
     "test": "mocha --recursive test",
@@ -11,38 +11,38 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/DFTi/strider-slack.git"
+    "url": "https://github.com/longmabot/longma-plugin-aethonan.git"
   },
   "keywords": [
     "strider",
-    "slack",
+    "aethonan",
     "plugin"
   ],
-  "author": "Keyvan Fatehi <keyvanfatehi@gmail.com>",
-  "license": "ISC",
+  "author": "Alexander Salas Bastidas <a.salas@ieee.org>",
+  "license": "GPL-3.0",
   "dependencies": {
-    "ejs": "^1.0.0",
-    "lodash": "^2.4.1",
-    "lodash.foreach": "^2.4.1",
+    "ejs": "^2.5.7",
+    "lodash": "^4.17.4",
+    "lodash.foreach": "^4.5.0",
     "slackihook": "^1.0.0",
-    "html-entities": "~1.2.0"
+    "html-entities": "~1.2.1"
   },
   "strider": {
     "type": "job",
-    "id": "slack",
-    "title": "Slack",
+    "id": "aethonan",
+    "title": "Aethonan",
     "worker": "worker.js",
     "webapp": "webapp.js",
     "icon": "icon.png",
     "config": {
-      "controller": "SlackController"
+      "controller": "AethonanController"
     }
   },
   "devDependencies": {
-    "browserify": "^4.1.10",
-    "chai": "^1.9.1",
-    "mocha": "^1.20.1",
-    "sinon-chai": "^2.5.0",
-    "watchify": "^0.10.2"
+    "browserify": "^14.4.0",
+    "chai": "^4.1.2",
+    "mocha": "^3.5.3",
+    "sinon-chai": "^2.14.0",
+    "watchify": "^3.9.0"
   }
 }
